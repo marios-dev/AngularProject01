@@ -1,0 +1,31 @@
+<input [(ngModel)]="name" type="search" name="userfield" value="" placeholder="Search User">
+<button (click)="getUser()">Search</button>
+<div *ngIf="name && User;else Mitsos">
+    <br />
+    <strong>{{User.login}}</strong>
+    <br>
+    <strong><img [src]='User.avatar_url'></strong>
+    <br>
+    <app-rating [RatingNo]="User.public_repos"></app-rating>
+    <br>
+    <button (click)="addToTable()">Add User</button>
+</div>
+
+<ng-template #Mitsos>No user!</ng-template>
+<table class="table table-dark table-hover table-bordered">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Number of repos</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of Users">
+            <td><img class="img-fluid" [src]='User.avatar_url'></td>
+            <td>{{user.login}}</td>
+            <td>{{user.public_repos}}</td>
+        </tr>
+    </tbody>
+</table>
+
